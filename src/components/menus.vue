@@ -1,27 +1,12 @@
 <template>
   <section class="menu">
     <div class="list-todos">
-      <a class="list-todo list activeListClass active">
-        <span class="count-list">2</span>
-        Brian
-      </a>
-      <a class="list-todo list activeListClass">
-        <span class="icon-lock"></span>
-        <span class="count-list">2</span>
-        Robert
-      </a>
-      <a class="list-todo list activeListClass">
-        <span class="count-list">3</span>
-        Jennifer
-      </a>
-      <a class="list-todo list activeListClass">
-        <span class="icon-lock"></span>
-        <span class="count-list">1</span>
-        James
-      </a>
-      <a class="list-todo list activeListClass">
-        <span class="count-list">2</span>
-        Karen
+      <a class="list-todo list" 
+         v-for="item in todoList"
+         :key="item.id">
+        <span class="icon-lock" v-if="item.isLock"></span>
+        <span class="count-list" v-if="item.count">{{ item.count }}</span>
+        {{ item.title }}
       </a>
       <a class=" link-list-new">
         <span class="icon-plus"></span>
@@ -31,9 +16,19 @@
   </section>
 </template>
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
-  
+  created () {
+    this.$store.dispatch('getTodo');
+  },
+  data () {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapGetters(['todoList'])
+  }
 }
 </script>
 <style lang="less">

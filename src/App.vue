@@ -5,8 +5,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+    axios.get('/todo').then(res => {
+      console.log("res",res)
+    })
+  }
 }
 </script>
 
